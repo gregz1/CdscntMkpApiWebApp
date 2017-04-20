@@ -1,0 +1,32 @@
+﻿@model CdiscountMarketPlaceApi_WebApp.Models.GetAllAllowedCategoryTreeMessage
+
+@{
+    ViewData["Title"] = "MyCategoryTreeMessage";
+}
+
+<div>
+    <h4>GetAllAllowedCategoryTree</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Parameters
+        </dt>
+        <dd>
+            @Html.DisplayNameFor(model => model._Token) :
+            @Html.DisplayFor(model => model._Token)
+        </dd>
+        <dt>
+            Request
+        </dt>
+        <dd>
+            <pre> @Html.DisplayFor(model => model._CategoryTreeRequestXML)</pre>
+        </dd>
+        <dt>
+            Response
+        </dt>
+        <dd>
+            <pre> @Html.DisplayFor(model => model._CategoryTreeMessageXML)</pre>
+        </dd>
+    </dl>
+</div>
+

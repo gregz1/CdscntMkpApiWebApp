@@ -1,0 +1,73 @@
+﻿
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+@using (Html.BeginForm("ProductActions", "ProductManager", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @model CdiscountMarketPlaceApi_WebApp.Models.ProductManager
+    <h2>Product Manager</h2>
+    
+    <div class="row">
+        <div class="col-xs-3">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Identification</h3>
+                </div>
+                <div class="panel-body">
+                    <ul class="nav nav-tabs">
+                        <li role="presentation" id="loginO" class="active">
+                            <a href="#loginTab" aria-controls="loginTab" role="tab" data-toggle="tab">login</a>
+                        </li>
+                        <li role="presentation" id="tokenO">
+                            <a href="#tokenTab" aria-controls="tokenTab" role="tab" data-toggle="tab">Token</a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <br />
+                        <div role="tabpanel" class="tab-pane active" id="loginTab">
+                            <div class="form-group">
+                                <label for="username">Login</label>
+                                @Html.TextBoxFor(model => model._Login, new { @id = "login", @class = "form-control", @placeholder = "Login" })
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                @Html.TextBoxFor(model => model._Password, new { @id = "password", @class = "form-control", @placeholder = "Password", @type = "password" })
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="tokenTab">
+                            <div class="form-group">
+                                <label for="token">Token</label>
+                                @Html.TextBoxFor(model => model._Token, new { @id = "token", @class = "form-control", @placeholder = "Token" })
+                                <br />
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">Features</h3>
+            </div>
+            <div class="panel-body">
+
+                @foreach (var feature in Model._FeaturesList)
+                {
+                    <br /><label for="item">@feature</label>
+                    @Html.RadioButtonFor(model => model._SelectedFeature, feature, Model._SelectedFeature)
+                }
+            </div>
+        </div>
+        </div>
+        
+        <div class="form-group">
+            <input type="submit" value="Send" class="btn btn-info" />
+            <input type="reset" value="Reset" class="btn btn-default" />
+        </div>
+        }

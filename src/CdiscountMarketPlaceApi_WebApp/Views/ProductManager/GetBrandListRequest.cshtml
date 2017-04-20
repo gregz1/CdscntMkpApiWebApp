@@ -1,0 +1,85 @@
+﻿@model CdiscountMarketPlaceApi_WebApp.Models.GetBrandListRequest
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+@using (Html.BeginForm("GetBrandListMessage", "ProductManager", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    <h2>Product Manager</h2>
+
+    <div class="row">
+        <div class="col-xs-3">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Identification</h3>
+                </div>
+                <div class="panel-body">
+                    <ul class="nav nav-tabs">
+                        <li role="presentation" id="loginO" class="active">
+                            <a href="#loginTab" aria-controls="loginTab" role="tab" data-toggle="tab">login</a>
+                        </li>
+                        <li role="presentation" id="tokenO">
+                            <a href="#tokenTab" aria-controls="tokenTab" role="tab" data-toggle="tab">Token</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <br />
+                        <div role="tabpanel" class="tab-pane active" id="loginTab">
+                            <div class="form-group">
+                                <label for="_Login">Login</label>
+                                @Html.TextBoxFor(model => model._Login, new { @id = "login", @class = "form-control", @placeholder = "Login" })
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                @Html.TextBoxFor(model => model._Password, new { @id = "password", @class = "form-control", @placeholder = "Password", @type = "password" })
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="tokenTab">
+                            <div class="form-group">
+                                <label for="token">Token</label>
+                                @Html.TextBoxFor(model => model._Token, new { @id = "token", @class = "form-control", @placeholder = "Token" })
+                                <br />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">Features</h3>
+            </div>
+            <div class="panel-body">
+
+                @foreach (var environment in Model._EnvironementList)
+                {
+                    <br /><label for="item">@environment</label>
+                    @Html.RadioButtonFor(model => model._EnvironmentSelected, environment, Model._EnvironmentSelected)
+                }
+            </div>
+        </div>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">Parameters</h3>
+            </div>
+            <div class="panel-body">
+
+                @foreach (var parameter in Model._Parameters)
+                {
+                    <br /><label for="item">@parameter.Key</label>
+                    @Html.TextBoxFor(p => p._Parameters.Values, new { @id = "parameter", @class = "form-control", @placeholder = "parameter" })
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Send" class="btn btn-info" />
+        <input type="reset" value="Reset" class="btn btn-default" />
+    </div>
+}
