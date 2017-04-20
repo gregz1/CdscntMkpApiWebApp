@@ -56,31 +56,39 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Offer manager<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Seller management", "Index", "Seller")</li>
-                            <li>@Html.ActionLink("Reactivate Seller", "ReactivateSellers", "Seller")</li>
-                            <li>@Html.ActionLink("Unban Seller", "UnbanSellers", "Seller")</li>
-                            <li>@Html.ActionLink("Batch role Update", "BatchRolesUpdate", "Seller")</li>
-                            <li>@Html.ActionLink("CLeursIP", "Index", "SellerLogs")</li>
-                            <li>@Html.ActionLink("Quotas", "Index", "Quota")</li>
+                            <li>@Html.ActionLink("SubmitOfferPackage", "SubmitOfferPackageRequest", "OfferManager")</li>
+                            <li>@Html.ActionLink("GetOfferPackageSubmissionResult", "GetOfferPackageSubmissionResultRequest", "OfferManager")</li>
+                            <li>@Html.ActionLink("GetOfferList", "GetOfferListRequest", "OfferManager")</li>
+                            <li>@Html.ActionLink("GetOfferListPaginated", "GetOfferListPaginatedRequest", "OfferManager")</li>                            
                         </ul>
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Order manager<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Product packages", "ProductPackages", "Package")</li>
-                            <li>@Html.ActionLink("Offer packages", "Index", "OfferPackage")</li>
-                            <li>@Html.ActionLink("Offers", "Index", "Offer")</li>
-                            <li>@Html.ActionLink("Offer integration codes", "ErrorCodeInfo", "OfferPackage")</li>
-                            <li>@Html.ActionLink("Where is my SKU", "Index", "WhereIsMySku")</li>
-                            <li>@Html.ActionLink("Rights management", "Index", "ProductRights")</li>
-                            <li>@Html.ActionLink("Image Check", "Index", "ImageCheck")</li>                           
+                            <li>@Html.ActionLink("GetOrderList", "GetOrderListRequest", "OrderManager")</li>
+                            <li>@Html.ActionLink("ValidateOrderList", "ValidateOrderListRequest", "OrderManager")</li>
+                            <li>@Html.ActionLink("CreateRefundVoucher", "CreateRefundVoucherRequest", "OrderManager")</li>                 
+                            <li>@Html.ActionLink("ManageParcel", "ManageParcelRequest", "OrderManager")</li>                 
                         </ul>
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CRM manager<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Veille", "Monitoring", "Moderation")</li>
-                            <li>@Html.ActionLink("Fermeture - dépublication", "Closing", "Moderation")</li>
+                            <li>@Html.ActionLink("GetOrderClaimList", "GetOrderClaimListRequest", "CRMManager")</li>
+                            <li>@Html.ActionLink("GetOfferQuestionList", "GetOfferQuestionListRequest", "CRMManager")</li>
+                            <li>@Html.ActionLink("CloseDiscussionList", "CloseDiscussionListRequest", "CRMManager")</li>
+                            <li>@Html.ActionLink("GetDiscussionMailList", "GetDiscussionMailListRequest", "CRMManager")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account manager<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("GetSellerInformation", "GetSellerInformationRequest", "AccountManager")</li>
+                            <li>@Html.ActionLink("GetSellerIndicators", "GetSellerIndicatorsRequest", "AccountManager")</li>
+                            <li>@Html.ActionLink("GetGlobalConfiguration", "GetGlobalConfigurationRequest", "AccountManager")</li>
+                            <li>@Html.ActionLink("GetParcelShopList", "GetParcelShopListRequest", "AccountManager")</li>
+                            <li>@Html.ActionLink("SubmitRelaysFile", "SubmitRelaysFileRequest", "AccountManager")</li>
+                            <li>@Html.ActionLink("GetRelaysFileSubmissionResult", "GetRelaysFileSubmissionResultRequest", "AccountManager")</li>
                         </ul>
                     </li>
                 </ul>
