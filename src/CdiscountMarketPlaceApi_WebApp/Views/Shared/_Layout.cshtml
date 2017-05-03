@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using CdiscountMarketPlaceApi_WebApp.Enumeration
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -8,12 +9,14 @@
     <environment names="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="bower_components/angular-ui-tree/dist/angular-ui-tree.min.css">
     </environment>
     <environment names="Staging,Production">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+        <link rel="stylesheet" href="bower_components/angular-ui-tree/dist/angular-ui-tree.min.css">
     </environment>
     @Html.ApplicationInsightsJavaScript(TelemetryConfiguration)
 </head>
@@ -91,7 +94,7 @@
                             <li>@Html.ActionLink("GetRelaysFileSubmissionResult", "GetRelaysFileSubmissionResultRequest", "AccountManager")</li>
                         </ul>
                     </li>
-                </ul>
+                </ul>               
             </div>
         </div>
     </div>
@@ -109,6 +112,8 @@
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="~/lib/angular/angular.js"></script>
+        <script type="text/javascript" src="bower_components/angular-ui-tree/dist/angular-ui-tree.js"></script>
     </environment>
     <environment names="Staging,Production">
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
@@ -119,9 +124,15 @@
                 asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
                 asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
         </script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"
+                asp-fallback-src="~/lib/angular/angular.min.js"
+                asp-fallback-test="window.angular">
+        </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
+        <script type="text/javascript" src="bower_components/angular-ui-tree/dist/angular-ui-tree.js"></script>
     </environment>
 
     @RenderSection("scripts", required: false)
+    
 </body>
 </html>

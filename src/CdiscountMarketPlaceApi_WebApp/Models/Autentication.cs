@@ -5,6 +5,7 @@ using System.Text;
 using System.Net.Http;
 using System.Runtime.Serialization;
 using CdscntMkpApiReference_Prod;
+using CdiscountMarketPlaceApi_WebApp.Enumeration;
 
 namespace CdiscountMarketPlaceApi_WebApp.Models
 {
@@ -17,7 +18,7 @@ namespace CdiscountMarketPlaceApi_WebApp.Models
          }
         public string _Login { get; set; }
         public string _Password { get; set; }
-        public string _Environment { get; set; }
+        public EnvironmentEnum _Environment { get; set; }
         public string _Token { get; set; }
         public static IConfigurationRoot Configuration { get; set; }
 
@@ -33,23 +34,17 @@ namespace CdiscountMarketPlaceApi_WebApp.Models
                 string svcIssue= "";
                 string realm="";
 
-                switch (_Environment)
+                if (_Environment == EnvironmentEnum.Production)
                 {
-                    case "Production":
-                        svcIssue = "https://sts.cdiscount.com/users/httpIssue.svc";
-                        realm = "https://wsvc.cdiscount.com/MarketplaceAPIService.svc";
+                    svcIssue = "https://sts.cdiscount.com/users/httpIssue.svc";
+                    realm = "https://wsvc.cdiscount.com/MarketplaceAPIService.svc";
 
-                        break;
-
-
-                    case "Préproduction":
-                        svcIssue = "https://sts.preprod-cdiscount.com/users/httpIssue.svc";
-                        realm = "https://wsvc.preprod-cdiscount.com/MarketplaceAPIService.svc";
-                        break;
                 }
+                else {
 
-
-                
+                    svcIssue = "https://sts.preprod-cdiscount.com/users/httpIssue.svc";
+                    realm = "https://wsvc.preprod-cdiscount.com/MarketplaceAPIService.svc";
+                }
                 string encoded = Convert.ToBase64String(Encoding.UTF8.GetBytes(string.Format("{0}:{1}", _Login, _Password)));
 
                 var stsUri = new Uri(string.Format("{0}/?realm={1}", svcIssue, realm));

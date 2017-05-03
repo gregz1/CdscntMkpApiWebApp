@@ -1,0 +1,101 @@
+﻿@using CdiscountMarketPlaceApi_WebApp.Enumeration
+@model CdiscountMarketPlaceApi_WebApp.Models.OfferManager.GetOfferPackageSubmissionResultRequest
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+@using (Html.BeginForm("GetOfferPackageSubmissionResultMessage", "OfferManager", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    <br />
+    <br />
+    <h2>GetProductPackageSubmissionResult</h2>
+    <div class="col-xs-3">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">Identification</h3>
+            </div>
+            <div class="panel-body">
+                <div class="tab-content">
+                    <br />
+                    <div role="tabpanel" class="tab-pane active" id="loginTab">
+                        <div class="form-group">
+                            <label for="usrname"><span class="glyphicon glyphicon-user"></span> Username</label>
+                            @Html.TextBoxFor(model => model._Login, new { @id = "login", @class = "form-control", @placeholder = "Login" })
+                        </div>
+                        <div class="form-group">
+                            <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
+                            @Html.TextBoxFor(model => model._Password, new { @id = "password", @class = "form-control", @placeholder = "Password", @type = "password" })
+                        </div>
+                        <div class="form-group">
+                            <label for="token"><span class="glyphicon glyphicon-qrcode"></span> Token</label>
+                            @Html.TextBoxFor(model => model._Token, new { @id = "token", @class = "form-control", @placeholder = "Token" })
+                        </div>
+                        <div class="form-group">
+                            <label for="token"><span class="glyphicon glyphicon-qrcode"></span> Environment</label>
+                            <br />
+                            <p class="nav navbar-nav navbar-left">
+                                @{
+                                    var sessionEnv = Model._EnvironmentSelected;
+                                    EnvironmentEnum envName;
+                                    if (sessionEnv == null)
+                                    {
+                                        envName = EnvironmentEnum.Preproduction;
+                                    }
+                                    else
+                                    {
+                                        try
+                                        {
+                                            envName = (EnvironmentEnum)sessionEnv;
+                                        }
+                                        catch (InvalidCastException ex)
+                                        {
+                                            envName = EnvironmentEnum.Preproduction;
+                                        }
+                                    }
+                                }
+                                <select class="form-control" id="envName">
+                                    @foreach (EnvironmentEnum env in Enum.GetValues(typeof(EnvironmentEnum)))
+                                    {
+                                        if (env == envName)
+                                        {
+                                            <option value="@env" selected="selected">@env</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@env">@env</option>
+                                        }
+                                    }
+                                </select>
+                            </p>
+                            <br />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">Parameters</h3>
+        </div>
+        <div class="panel-body">
+
+            @foreach (var parameter in Model._Parameters)
+                {
+                <br /><label for="item">@parameter.Key</label>
+                @Html.TextBoxFor(p => p._Parameters.Values, new { @id = "parameter", @class = "form-control", @placeholder = "parameter" })
+            }
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <input type="submit" value="Send" class="btn btn-info" />
+        <input type="reset" value="Reset" class="btn btn-default" />
+    </div>
+                                    }

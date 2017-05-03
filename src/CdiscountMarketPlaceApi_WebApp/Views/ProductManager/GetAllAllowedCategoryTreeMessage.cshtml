@@ -1,32 +1,196 @@
 ﻿@model CdiscountMarketPlaceApi_WebApp.Models.GetAllAllowedCategoryTreeMessage
 
 @{
-    ViewData["Title"] = "MyCategoryTreeMessage";
+    ViewData["Title"] = "GetAllAllowedCategoryTree";
 }
 
+<link rel="stylesheet" href="src/jquery.treefilter.css">
+<br/>
+<br />
 <div>
-    <h4>GetAllAllowedCategoryTree</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            Parameters
-        </dt>
-        <dd>
-            @Html.DisplayNameFor(model => model._Token) :
-            @Html.DisplayFor(model => model._Token)
-        </dd>
-        <dt>
-            Request
-        </dt>
-        <dd>
-            <pre> @Html.DisplayFor(model => model._CategoryTreeRequestXML)</pre>
-        </dd>
-        <dt>
-            Response
-        </dt>
-        <dd>
-            <pre> @Html.DisplayFor(model => model._CategoryTreeMessageXML)</pre>
-        </dd>
-    </dl>
+     <div class="container">
+        <h2>GetAllAllowedCategoryTree</h2>        
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#RequestXML">Click  to display the XML Request</a>
+                    </h4>
+                </div>
+                <div id="RequestXML" class="panel-collapse collapse">
+                    <div class="panel-body"><pre lang="xml"> @Html.DisplayFor(model => model._RequestXML)</pre></div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#MessageXML">Click  to display the XML Message</a>
+                    </h4>
+                </div>
+                <div id="MessageXML" class="panel-collapse collapse">
+                    <div class="panel-body"><pre lang="xml"> @Html.DisplayFor(model => model._MessageXML)</pre></div>
+                </div>
+            </div>            
+            <div class="panel panel-default">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#CategoryTree">Click  to display the Cdicount Category Tree</a>
+                            </h4>
+                        </div>
+                        <div id="CategoryTree" class="panel-collapse collapse">
+                            <ul class="list-group">
+                                
+                                             @foreach (var pi1 in Model._AllCategoryTreeMessage.Result.CategoryTree.ChildrenCategoryList)
+                                             {
+
+                                                <li class="list-group-item">
+                                
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading">
+                                                            <table class="table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Name</th>
+                                                                        <th>Code</th>
+                                                                        <th>AllowOfferIntegration</th>
+                                                                        <th>AllowProductIntegration</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td><a data-toggle="collapse" href="#@pi1.Code" onclick="location.href=#@pi1.Code;">@pi1.Name</a></td>
+                                                                        <td>@pi1.Code</td>
+                                                                        <td>@pi1.AllowOfferIntegration</td>
+                                                                        <td>@pi1.AllowProductIntegration</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <div id="@pi1.Code" class="panel-collapse collapse">
+                                                            
+                                                                    <ul class="list-group">
+
+                                                                        @foreach (var pi2 in pi1.ChildrenCategoryList)
+                                                                        {
+                                                                            <li class="list-group-item">
+                                                                            <div class="panel panel-default">
+                                                                                <div class="panel-heading">
+                                                                                    <table class="table">                                                                                        
+                                                                                        <tbody>
+                                                                                            <tr>
+                                                                                                <td><a data-toggle="collapse" href="#@pi2.Code" onclick="location.href=#@pi2.Code;">@pi2.Name</a></td>
+                                                                                                <td>@pi2.Code</td>
+                                                                                                <td>@pi2.AllowOfferIntegration</td>
+                                                                                                <td>@pi2.AllowProductIntegration</td>
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+                                                                                <div id="@pi2.Code" class="panel-collapse collapse">
+                                                                                    <ul class="list-group">
+
+                                                                                        @foreach (var pi3 in pi2.ChildrenCategoryList)
+                                                                                        {
+                                                                                            <li class="list-group-item">
+                                                                                                <div class="panel panel-default">
+                                                                                                    <div class="panel-heading">
+                                                                                                        <table class="table">
+                                                                                                            <tbody>
+                                                                                                                <tr>
+                                                                                                                    <td><a data-toggle="collapse" href="#@pi3.Code" onclick="location.href=#@pi3.Code;">@pi3.Name</a></td>
+                                                                                                                    <td>@pi3.Code</td>
+                                                                                                                    <td>@pi3.AllowOfferIntegration</td>
+                                                                                                                    <td>@pi3.AllowProductIntegration</td>
+                                                                                                                </tr>
+                                                                                                            </tbody>
+                                                                                                        </table>
+                                                                                                    </div>
+                                                                                                    <div id="@pi3.Code" class="panel-collapse collapse">
+                                                                                                       
+                                                                                                            @foreach (var pi4 in pi3.ChildrenCategoryList)
+                                                                                                            {
+                                                                                                                <table class="table">                                                                                                                  
+                                                                                                                    <tbody>
+                                                                                                                        <tr>
+                                                                                                                            <td>@pi4.Name</td>
+                                                                                                                            <td>@pi4.Code</td>
+                                                                                                                            <td>@pi4.AllowOfferIntegration</td>
+                                                                                                                            <td>@pi4.AllowProductIntegration</td>
+                                                                                                                        </tr>
+                                                                                                                    </tbody>
+                                                                                                                </table>
+                                                                                                            }
+
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </li>
+                                                                                        }
+
+                                                                                    </ul>                                                                                   
+                                                                                </div>
+                                                                            </div>
+
+
+
+                                                                        </li>
+
+
+                                                                        }
+
+                                                                    </ul>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                               
+
+                                            }                                        
+                                                             
+                            </ul>
+                            <div class="panel-footer"></div>
+                        </div>
+                    </div>
+                
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+    </div>
+
+    <div>
+
+    </div>
 </div>
 

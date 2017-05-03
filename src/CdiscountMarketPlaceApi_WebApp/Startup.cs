@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.AspNetCore.Mvc.ViewFeatures.Internal;
 
 namespace CdiscountMarketPlaceApi_WebApp
 {
@@ -37,6 +36,16 @@ namespace CdiscountMarketPlaceApi_WebApp
             services.AddApplicationInsightsTelemetry(Configuration);
 
             services.AddMvc();
+            //services.AddSingleton<ITempDataProvider, CookieTempDataProvider>();
+            services.AddDistributedMemoryCache();
+
+            services.AddSession(options =>
+            {
+                // Set a short timeout for easy testing.
+                options.IdleTimeout = TimeSpan.FromSeconds(600);
+                options.CookieHttpOnly = true;
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,7 +55,7 @@ namespace CdiscountMarketPlaceApi_WebApp
             loggerFactory.AddDebug();
 
             app.UseApplicationInsightsRequestTelemetry();
-
+            app.UseSession();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -67,6 +76,7 @@ namespace CdiscountMarketPlaceApi_WebApp
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
         }
     }
 }

@@ -1,0 +1,34 @@
+﻿@model CdiscountMarketPlaceApi_WebApp.Models.OrderManager.ValidateOrderListResponse
+
+@{
+    ViewData["Title"] = "ValidateOrderList";
+}
+
+<br />
+<br />
+<br />
+<div>
+    <h4>ValidateOrderList</h4>
+    <hr />
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" href="#RequestXML">Click  to display the XML Request</a>
+            </h4>
+        </div>
+        <div id="RequestXML" class="panel-collapse collapse">
+            <div class="panel-body"><pre lang="xml"> @Html.DisplayFor(model => model._RequestXML)</pre></div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" href="#MessageXML">Click  to display the XML Message</a>
+            </h4>
+        </div>
+        <div id="MessageXML" class="panel-collapse collapse">
+            <div class="panel-body"><pre lang="xml"> @Html.DisplayFor(model => model._MessageXML)</pre></div>
+        </div>
+    </div>
+</div>
+
