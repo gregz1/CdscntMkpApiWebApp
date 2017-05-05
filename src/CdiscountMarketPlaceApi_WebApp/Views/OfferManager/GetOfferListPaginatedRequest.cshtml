@@ -88,16 +88,16 @@
         </div>
         <div class="panel-body">
 
-            <label for="Select Filter Criterion"><span class="glyphicon glyphicon-user"></span> Select Filter Criterion</label>
+            <label for="Select Filter Criterion"><span class="glyphicon glyphicon-filter"></span> Select Filter Criterion</label>
             @Html.DropDownListFor(m => m._OfferFilterPaginated.OfferFilterCriterion, new SelectList(Enum.GetValues(typeof(OfferFilterCriterion))),
-                    "Select Filter Criterion")
-            <label for="Select Sort Order"><span class="glyphicon glyphicon-user"></span> Select Sort Order</label>
+                    "Select Filter Criterion")<br/>
+            <label for="Select Sort Order"><span class="glyphicon glyphicon-arrow-down"></span> Select Sort Order</label>
             @Html.DropDownListFor(m => m._OfferFilterPaginated.OfferSortOrder, new SelectList(Enum.GetValues(typeof(OfferSortOrder))),
-                    "Select Sort Order")
-            <label for="OfferPoolId"><span class="glyphicon glyphicon-user"></span> OfferPoolId</label>
-            @Html.TextBoxFor(model => model._OfferFilterPaginated.OfferPoolId, new { @id = "poolId", @class = "form-control", @placeholder = "poolId" })
-            <label for="PageNumber"><span class="glyphicon glyphicon-user"></span> PageNumber</label>
-            @Html.TextBoxFor(model => model._OfferFilterPaginated.PageNumber, new { @id = "PageNumber", @class = "form-control", @placeholder = "PageNumber" })
+                    "Select Sort Order")<br />
+            <label for="OfferPoolId"><span class="glyphicon badge"></span> OfferPoolId</label>
+            @Html.TextBoxFor(model => model._OfferFilterPaginated.OfferPoolId, new { @id = "poolId", @class = "form-control", @placeholder = "poolId" })<br />
+            <label for="PageNumber"><span class="glyphicon glyphicon-book"></span> PageNumber</label>
+            @Html.TextBoxFor(model => model._OfferFilterPaginated.PageNumber, new { @id = "PageNumber", @class = "form-control", @placeholder = "PageNumber" })<br />
            
         </div>
     </div>

@@ -1,5 +1,90 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using CdiscountMarketPlaceApi_WebApp.Enumeration
+@using CdscntMkpApiReference_Prod;
+@model CdiscountMarketPlaceApi_WebApp.Models.OrderManager.GetOrderListRequest
+
+
 @{
+    ViewData["Title"] = "Index";
 }
+
+
+@using (Html.BeginForm("GetOrderListMessage", "OrderManager", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    <br />
+    <br />
+    <h2>GetOrderList</h2>
+    <div class="col-xs-3">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">Identification</h3>
+            </div>
+            <div class="panel-body">
+                <div class="tab-content">
+                    <br />
+                    <div role="tabpanel" class="tab-pane active" id="loginTab">
+                        <div class="form-group">
+                            <label for="usrname"><span class="glyphicon glyphicon-user"></span> Username</label>
+                            @Html.TextBoxFor(model => model._Login, new { @id = "login", @class = "form-control", @placeholder = "Login" })
+                        </div>
+                        <div class="form-group">
+                            <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
+                            @Html.TextBoxFor(model => model._Password, new { @id = "password", @class = "form-control", @placeholder = "Password", @type = "password" })
+                        </div>
+                        <div class="form-group">
+                            <label for="token"><span class="glyphicon glyphicon-qrcode"></span> Token</label>
+                            @Html.TextBoxFor(model => model._Token, new { @id = "token", @class = "form-control", @placeholder = "Token" })
+                        </div>
+                        <div class="form-group">
+                            <label for="token"><span class="glyphicon glyphicon-qrcode"></span> Environment</label>
+                            <br />
+                            <p class="nav navbar-nav navbar-left">
+                                @Html.DropDownListFor(m => m._EnvironmentSelected, new SelectList(Enum.GetValues(typeof(EnvironmentEnum))),
+                    "Select Environment")
+                            </p>
+                            <br />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-xs-5">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">Parameters</h3>
+            </div>
+            <div class="panel-body">
+                <div class="tab-content">
+
+                    <label for="Select Filter Criterion">Select OrderState</label><br />
+                    @Html.DropDownListFor(m => m._OrderFilter.States, new SelectList(Enum.GetValues(typeof(OrderStateEnum))), "Select Filter Criterion")<br />
+                    <label for="Set BeginCreationDate"><span class="glyphicon glyphicon-calendar"></span>Set BeginCreationDate</label>
+                    @Html.TextBoxFor(m => m._OrderFilter.BeginCreationDate, new { @class = "form-control datepicker", placeholder = "Select BeginCreationDate" })<br />
+                    <label for="Set BeginModificationDate"><span class="glyphicon glyphicon-calendar"></span>Set BeginModificationDate</label>
+                    @Html.TextBoxFor(m => m._OrderFilter.BeginModificationDate, new { @class = "form-control datepicker", placeholder = "Select BeginModificationDate" })<br />
+                    <label for="Set EndCreationDate"><span class="glyphicon glyphicon-calendar"></span>Set EndCreationDate</label>
+                    @Html.TextBoxFor(m => m._OrderFilter.EndCreationDate, new { @class = "form-control datepicker", placeholder = "Select EndCreationDate" })<br />
+                    <label for="Set EndModificationDate"><span class="glyphicon glyphicon-calendar"></span>Set EndModificationDate</label>
+                    @Html.TextBoxFor(m => m._OrderFilter.EndModificationDate, new { @class = "form-control datepicker", placeholder = "Select EndModificationDate" })<br />
+                    <label for="Select Corporation Code"><span class="glyphicon glyphicon-copyright-mark"></span>Select Corporation Code</label>
+                    @Html.TextBoxFor(m => m._OrderFilter.CorporationCode, new { @id = "CorporationCode", @class = "form-control", @placeholder = "parameter" })<br />
+                    <label for="Fetch Order Lines"><span class="glyphicon glyphicon-zoom-in"></span>Fetch Order Lines</label>
+                    @Html.CheckBoxFor(m => m._OrderFilter.FetchOrderLines, new { @id = "FetchOrderLines", @class = "form-control", @placeholder = "FetchOrderLines" })<br />
+                    <label for="Fetch Tracking Information"><span class="glyphicon glyphicon-zoom-in"></span>Fetch Tracking Information</label>
+                    @Html.CheckBoxFor(m => m._OrderFilter.FetchParcels, new { @id = "FetchParcels", @class = "form-control", @placeholder = "FetchParcels" })<br />
+                    <label for="Include External Orders Fulfiled by Cdiscount"><span class="glyphicon glyphicon-zoom-in"></span>Include External Orders Fulfiled by Cdiscount</label>
+                    @Html.CheckBoxFor(m => m._OrderFilter.IncludeExternalFbcSiteId, new { @id = "IncludeExternalFbcSiteId", @class = "form-control", @placeholder = "IncludeExternalFbcSiteId" })<br />
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+        <div class="form-group">
+            <input type="submit" value="Send" class="btn btn-info" />
+            <input type="reset" value="Reset" class="btn btn-default" />
+        </div>
+        }

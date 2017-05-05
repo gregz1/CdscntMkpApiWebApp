@@ -53,10 +53,17 @@ namespace CdiscountMarketPlaceApi_WebApp.Controllers
                 HttpContext.Session.SetString(SessionEnvironment, MyRequest._EnvironmentSelected.ToString());
             }
         }
-        public ActionResult SubmitOfferPackageRequest()
+
+        [HttpPost]
+        public ActionResult ValidateOrderListRequest(GetOrderListMessage MyGetOrderListMessage)
         {
-            Request MyRequest = new ValidateOrderListRequest();
-            GetSessionData(ref MyRequest);
+            Request MyRequest = new ValidateOrderListRequest(MyGetOrderListMessage);
+            if (HttpContext.Session.GetString(SessionToken) != null)
+            {
+                MyRequest._Login = HttpContext.Session.GetString(SessionLogin);
+                MyRequest._Token = HttpContext.Session.GetString(SessionToken);
+                MyRequest._EnvironmentSelected = (EnvironmentEnum)Enum.Parse(typeof(EnvironmentEnum), HttpContext.Session.GetString(SessionEnvironment));
+            }
             return View(MyRequest);
         }
         [HttpPost]
@@ -71,27 +78,10 @@ namespace CdiscountMarketPlaceApi_WebApp.Controllers
             SetSessionData(MyRequest);
             return View(new ValidateOrderListResponse(MyRequest));
         }
-        public ActionResult ValidateOrderListRequest()
+
+        public ActionResult GetOrderListRequest()
         {
-            Request MyRequest = new ValidateOrderListRequest();
-            if (HttpContext.Session.GetString(SessionToken) != null)
-            {
-                MyRequest._Login = HttpContext.Session.GetString(SessionLogin);
-                MyRequest._Token = HttpContext.Session.GetString(SessionToken);
-                MyRequest._EnvironmentSelected = (EnvironmentEnum)Enum.Parse(typeof(EnvironmentEnum), HttpContext.Session.GetString(SessionEnvironment));
-            }
-            return View(MyRequest);
-        }/*
-        [HttpPost]
-        public ActionResult GetOfferListPaginatedMessage(GetOfferListPaginatedRequest MyRequest)
-        {
-            MyRequest.GetHeaderMessage();
-            SetSessionData(MyRequest);
-            return View(new GetOfferListPaginatedMessage(MyRequest));
-        }
-        public ActionResult GetOfferListRequest()
-        {
-            Request MyRequest = new GetOfferListRequest();
+            Request MyRequest = new GetOrderListRequest();
             if (HttpContext.Session.GetString(SessionToken) != null)
             {
                 MyRequest._Login = HttpContext.Session.GetString(SessionLogin);
@@ -101,29 +91,13 @@ namespace CdiscountMarketPlaceApi_WebApp.Controllers
             return View(MyRequest);
         }
         [HttpPost]
-        public ActionResult GetOfferListMessage(GetOfferListRequest MyRequest)
+        public ActionResult GetOrderListMessage(GetOrderListRequest MyRequest)
         {
+          
             MyRequest.GetHeaderMessage();
             SetSessionData(MyRequest);
-            return View(new GetOfferListMessage(MyRequest));
+            return View(new GetOrderListMessage(MyRequest));
         }
-
-
-        public ActionResult GetOfferPackageSubmissionResultRequest()
-        {
-            Request MyRequest = new GetOfferPackageSubmissionResultRequest();
-            GetSessionData(ref MyRequest);
-            return View(MyRequest);
-        }
-
-        [HttpPost]
-        public ActionResult GetOfferPackageSubmissionResultMessage(GetProductListRequest MyRequest)
-        {
-            MyRequest.GetHeaderMessage();
-            SetSessionData(MyRequest);
-            return View(new GetOfferPackageSubmissionResultMessage(MyRequest));
-        }*/
-
 
     }
 }

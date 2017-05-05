@@ -18,7 +18,14 @@ namespace CdiscountMarketPlaceApi_WebApp.Models.OrderManager
                 _RequestXML = _RequestInterceptor.LastRequestXML;
                 _MessageXML = _RequestInterceptor.LastResponseXML;
             }
+
+        public GetOrderListMessage()
+        {
+            _Environment = Enumeration.EnvironmentEnum.Preproduction;
+
         }
+
+    }
     }
 
 

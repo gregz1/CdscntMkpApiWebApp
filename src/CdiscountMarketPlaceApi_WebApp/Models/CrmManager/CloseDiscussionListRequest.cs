@@ -1,11 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using CdscntMkpApiReference_Prod;
 
 namespace CdiscountMarketPlaceApi_WebApp.Models.CrmManager
 {
     public class CloseDiscussionListRequest:Request
     {
+            public CloseDiscussionRequest _CloseDiscussionRequest { get; set; }
+
+
+            public CloseDiscussionListRequest()
+            {
+                _CloseDiscussionRequest = new CloseDiscussionRequest();
+            }
+
+        
     }
 }
